@@ -26,12 +26,9 @@ Route::get('home', function () {
 Route::get('word_list', function () {
     return view('word_list');
 });
-Route::get('category', function () {
-    return view('category');
-});
-Route::get('lesson', function () {
-    return view('lesson');
-});
+Route::resource('category','CategoryViewController');
+Route::post('lesson_start','LessonStartController@start');
+Route::resource('lesson','LessonStartController');
 Route::get('result', function () {
     return view('result');
 });
