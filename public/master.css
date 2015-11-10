@@ -1,0 +1,15 @@
+.box
+{
+border: 2px solid black;
+height: 280px;
+border-radius: 45px;
+}
+.form
+{
+height: 300px;
+text-align: center;
+}
+.row
+{
+padding: 30px;
+}
