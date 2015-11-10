@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Lesson;
+use App\Question;
 
-class LessonStartController extends Controller
+class CategoryViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +19,9 @@ class LessonStartController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
+        $questions = Question::all();
+        return view('category', compact('categories','questions'));
     }
 
     /**
@@ -82,13 +88,5 @@ class LessonStartController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function start()
-    {
-         if(\Auth::check())
-        {
-            echo \Auth::user()->name ;
-        }
-        else echo "not logged in";
     }
 }

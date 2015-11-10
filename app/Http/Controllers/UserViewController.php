@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class LessonStartController extends Controller
+class UserViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +16,7 @@ class LessonStartController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -82,13 +83,5 @@ class LessonStartController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function start()
-    {
-         if(\Auth::check())
-        {
-            echo \Auth::user()->name ;
-        }
-        else echo "not logged in";
     }
 }
