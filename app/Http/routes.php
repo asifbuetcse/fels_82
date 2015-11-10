@@ -20,4 +20,20 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth','as' => 'auth'], functio
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
 });
+Route::get('home', function () {
+    return view('home');
+});
+Route::get('word_list', function () {
+    return view('word_list');
+});
+Route::resource('category','CategoryViewController');
+Route::post('lesson','LessonStartController@index');
+Route::get('result', function () {
+    return view('result');
+});
+Route::get('profile', function () {
+    return view('profile');
+});
+
+
 
