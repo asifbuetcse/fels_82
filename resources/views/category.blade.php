@@ -1,7 +1,7 @@
 @extends('master')
 @section('title', 'Page Title')
 @section('content')
-<?php $i = 0 ?>
+<?php $i=0 ?>
 <div class = "panel panel-primary">
     <div class = "panel-heading">
         <h1 class = "panel-title">Panel</h1>
