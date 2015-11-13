@@ -5,80 +5,36 @@
     <div class="col-md-3">
     </div>
     <div class="col-md-2">
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-            Select category
-        </button>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="#">
-                    La Merridian
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Celica
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    chick a licken
-                </a>
-            </li>
-        </ul>
-    </div>
-    </div>
-    <div class="col-md-1">
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                    All
-            </label>
-        </div>
-    </div>
-    <div class="col-md-1">
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                    Learned
-            </label>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                    Not Learned
-            </label>
+        <div class="dropdown">
+            {!! Form::open(['action' => 'WordsController@store']) !!}
+                {!! Form::select('category_id', $categories, 1, array('class' => 'form-control')) !!}
+                {!! Form::select('learned_value', [config('custom.all_questions') => 'All Questions', config('custom.learned') => 'Learned', config('custom.not_learned') => 'Not learned'], config('custom.all_questions')) !!}
+                {!! Form::submit('Filter') !!}
+            {!! Form::close() !!}
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-2">
-        <button type="button" class="btn btn-info">
-            Filter
-        </button>
-        <button type="button" class="btn btn-success">
-            PDF
-        </button>
-    </div>
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Words</th>
+                <th>Meanings</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($questions as $question)
+                <tr>
+                    <td>{{ $question->english_word }}
+                    </td>
+                    @foreach ($question->answers as $answer)
+                        @if ($answer->is_correct == '1')
+                            <td>{{ $answer->bengali_meaning }}</td>
+                        @endif
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
-    @foreach ($words as $word)
-        <div class="row-fluid">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-5">
-                {{ $word->english_word }}
-            </div>
-            <div class="col-md-5">
-                @foreach ($meanings as $meaning)
-                    @if ($word->id == $meaning->id)
-                        {{ $meaning->bengali_meaning }}
-                    @endif
-                @endforeach
-            </div>
-        </div>
-    @endforeach
 @endsection

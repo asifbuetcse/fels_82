@@ -8,6 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Question;
 use App\Answer;
+use App\Category;
+use App\Learnedword;
+use Config;
 
 class WordsController extends Controller
 {
@@ -18,9 +21,9 @@ class WordsController extends Controller
      */
     public function index()
     {
-        $words = Question::all();
-        $meanings = Answer::all();
-        return view('words', compact('words', 'meanings'));
+        $questions = Question::all();
+        $categories = Category::lists('category_name', 'id');
+        return view('words', compact('questions', 'categories'));
     }
 
     /**
@@ -41,7 +44,21 @@ class WordsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoryId = $request->input('category_id');
+        $learnedValue = $request->input('learned_value');
+        $userId = \Auth::user()->id;
+        $learnedquestionsIdCollection = Learnedword::whereCategoryId($categoryId)->whereUserId($userId)->lists('question_id');
+        if ($learnedValue == config('custom.all_questions')) {
+            $questions = Question::whereCategoryId($categoryId)->get();
+        } elseif ($learnedValue == config('custom.learned')) {
+            $questions = Question::whereIn('id', $learnedquestionsIdCollection)->get();
+        } else {
+            $questions = Question::whereCategoryId($categoryId)->whereNotIn('id', $learnedquestionsIdCollection)->get();
+        }
+        $questionsIdCollection = $questions->lists('id');
+        $answers = Answer::whereIn('question_id', $questionsIdCollection)->whereIsCorrect(1)->get();
+        $categories = Category::lists('category_name', 'id');
+        return view('words', compact('questions', 'answers', 'categories'));
     }
 
     /**
