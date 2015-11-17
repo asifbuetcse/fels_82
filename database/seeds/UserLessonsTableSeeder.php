@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
-class LessonsTableSeeder extends Seeder
+class UserLessonsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class LessonsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('lessons')->insert([[
+        DB::table('userlessons')->insert([[
             'user_id' => 1,
             'lesson_id'=> 1,
             'score'=>0,
