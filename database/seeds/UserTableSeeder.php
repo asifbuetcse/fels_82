@@ -17,60 +17,70 @@ class UserTableSeeder extends Seeder
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 2,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 3,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 4,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 5,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 6,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 7,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 8,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 9,
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
+            'is_admin' => false
         ],
         [
             'id'=> 10,
-            'name' => str_random(10),
+            'name' => 'omid',
             'email' => str_random(10).'@gmail.com',
-            'password' => bcrypt('secret'),
+            'password' => 123,
+            'is_admin' => true
         ]]);
     }
 }

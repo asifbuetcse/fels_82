@@ -16,6 +16,11 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $categories = Category::all();
@@ -63,7 +68,9 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findorFail($id);
+        $this->authorize('edit', $category);
+        return view('categories/edit', compact('category'));
     }
 
     /**
@@ -75,7 +82,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $data = Category::findorFail($id);
+        $this->authorize('edit', $category);
+        $data->update($input);
+        return redirect('categories');
     }
 
     /**
@@ -86,6 +97,12 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $this->authorize('edit', $category);
+        foreach ($category->questions as $question) {
+            $question->delete();
+        }
+        $category->delete();
+        return back();
     }
 }

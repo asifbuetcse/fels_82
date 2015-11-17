@@ -10,4 +10,8 @@ class Answer extends Model
     {
         return $this->belongsTo('App\Question');
     }
+    public function scopeCorrect($query)
+    {
+        return $query->whereIsCorrect(1);
+    }
 }

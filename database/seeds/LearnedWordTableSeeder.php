@@ -24,16 +24,6 @@ class LearnedWordTableSeeder extends Seeder
             'question_id' => 2,
         ],
         [
-            'user_id'=> 1,
-            'category_id' => 2,
-            'question_id' => 1,
-        ],
-        [
-            'user_id'=> 1,
-            'category_id' => 2,
-            'question_id' => 2,
-        ],
-        [
             'user_id'=> 2,
             'category_id' => 1,
             'question_id' => 1,
@@ -44,16 +34,6 @@ class LearnedWordTableSeeder extends Seeder
             'question_id' => 2,
         ],
         [
-            'user_id'=> 2,
-            'category_id' => 2,
-            'question_id' => 1,
-        ],
-        [
-            'user_id'=> 2,
-            'category_id' => 2,
-            'question_id' => 2,
-        ],
-        [
             'user_id'=> 3,
             'category_id' => 1,
             'question_id' => 1,
@@ -61,16 +41,6 @@ class LearnedWordTableSeeder extends Seeder
         [
             'user_id'=> 3,
             'category_id' => 1,
-            'question_id' => 2,
-        ],
-        [
-            'user_id'=> 3,
-            'category_id' => 2,
-            'question_id' => 1,
-        ],
-        [
-            'user_id'=> 3,
-            'category_id' => 2,
             'question_id' => 2,
         ]]);
     }

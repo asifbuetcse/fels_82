@@ -20,12 +20,13 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth','as' => 'auth'], functio
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
 });
-Route::resource('users','UsersController');
-Route::resource('categories','CategoriesController');
-Route::resource('words','WordsController');
-Route::resource('results','ResultsController');
-Route::resource('lessons','LessonsController');
-Route::resource('profiles','ProfilesController');
+Route::resource('users', 'UsersController', ['only' => ['index']]);
+Route::resource('categories', 'CategoriesController', ['only' => ['index', 'show', 'edit', 'update', 'destroy']]);
+Route::resource('questions', 'QuestionsController', ['only' => ['index']]);
+Route::resource('answers', 'AnswersController', ['only' => ['index', 'store']]);
+Route::resource('lessons', 'LessonsController', ['only' => ['index', 'store']]);
 Route::get('home', function () {
     return view('home');
 });
+
+

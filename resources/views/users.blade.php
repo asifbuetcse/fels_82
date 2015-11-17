@@ -27,9 +27,7 @@
 <div class="row">
     <div class="col-md-4">
         <h3>
-            @if (Auth::check())
-                {{ Auth::user()->name }}
-            @endif
+            {{ Auth::user()->name }}
         </h3>
     </div>
 </div>

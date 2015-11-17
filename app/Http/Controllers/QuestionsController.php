@@ -6,18 +6,41 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\UserLesson;
+use App\Question;
+use App\Answer;
+use App\Category;
+use App\Learnedword;
+use Config;
 
-class ResultsController extends Controller
+class QuestionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
     {
-        return view('results');
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+        $learnedValue = $request->input('learned_value');
+        $userId = \Auth::user()->id;
+        $learnedquestionsIdCollection = Learnedword::whereCategoryId($categoryId)->whereUserId($userId)->lists('question_id');
+        if ($learnedValue == config('custom.all_questions')) {
+            $questions = Question::whereCategoryId($categoryId)->get();
+        } elseif ($learnedValue == config('custom.learned')) {
+            $questions = Question::whereIn('id', $learnedquestionsIdCollection)->get();
+        } else {
+            $questions = Question::whereCategoryId($categoryId)->whereNotIn('id', $learnedquestionsIdCollection)->get();
+        }
+        $questionsIdCollection = $questions->lists('id');
+        $answers = Answer::whereIn('question_id', $questionsIdCollection)->whereIsCorrect(1)->get();
+        $categories = Category::lists('category_name', 'id');
+        return view('questions/index', compact('questions', 'answers', 'categories'));
     }
 
     /**
@@ -38,14 +61,8 @@ class ResultsController extends Controller
      */
     public function store(Request $request)
     {
-        $checked = $request->input('check_list');
-        $userLesson = new UserLesson;
-        $userLesson->user_id = \Auth::user()->id;
-        $userLesson->lesson_id = $request->input('lesson_id');
-        $userLesson->score = 0;
-        $userLesson->save();
+        //
     }
-
 
     /**
      * Display the specified resource.

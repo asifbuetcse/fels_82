@@ -6,21 +6,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Question;
-use App\Answer;
+use App\UserLesson;
 
-class WordsController extends Controller
+class AnswersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $words = Question::all();
-        $meanings = Answer::all();
-        return view('words', compact('words', 'meanings'));
+        return view('results');
     }
 
     /**
@@ -41,8 +43,14 @@ class WordsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checked = $request->input('check_list');
+        $userLesson = new UserLesson;
+        $userLesson->user_id = \Auth::user()->id;
+        $userLesson->lesson_id = $request->input('lesson_id');
+        $userLesson->score = 0;
+        $userLesson->save();
     }
+
 
     /**
      * Display the specified resource.
